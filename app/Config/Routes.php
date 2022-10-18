@@ -2,6 +2,8 @@
 
 namespace Config;
 
+use CodeIgniter\Router\RouteCollection;
+
 // Create a new instance of our RouteCollection class.
 $routes = Services::routes();
 
@@ -36,6 +38,24 @@ $routes->set404Override();
 // We get a performance increase by specifying the default
 // route since we don't have to scan directories.
 $routes->get('/', 'Home::index');
+
+$routes->group('login', function(RouteCollection $routes){
+    $routes->get('lupa', 'DokterController::viewLupaPassword');
+    $routes->get('/', 'DokterController::viewLogin');
+    $routes->post('/', 'DokterController::login');
+    $routes->delete('/', 'DokterController::logout');
+    $routes->patch('/', 'DokterController::lupaPassword');
+});
+
+$routes->group('dokter', function(RouteCollection $routes){
+    $routes->get('/', 'DokterController::index');
+    $routes->post('/', 'DokterController::store');
+    $routes->patch('/', 'DokterController::update');
+    $routes->delete('/', 'DokterController::delete');
+    $routes->get('(:num)', 'DokterController::show/$1');
+    $routes->get('all', 'DokterController::all');
+
+});
 
 /*
  * --------------------------------------------------------------------

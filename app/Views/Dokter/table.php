@@ -22,7 +22,6 @@
         </tr>
     </thead>
 </table>
-
 <script>
     $(document).ready(function(){
         $('table#table-pelanggan').DataTable({
@@ -37,12 +36,26 @@
                   render: (data,type,row,meta)=>{
                     return meta.settings._iDisplayStart + meta.row + 1;
                   }
-            },
-                { data: 'id', },
+                },
                 { data: 'nama' },
                 { data: 'email' },
-                { data: 'gender' },
-                { data: 'id' }
+                { data: 'gender',
+                  render: (data, type, meta, row)=>{
+                     if( data === 'L'){
+                        return 'Laki-Laki';
+                     }else if( data === 'P' ){
+                        return 'Perempuan';
+                     }
+                     return data;
+                  }
+                },
+                { data: 'id',
+                  render: (data, type,meta, row)=>{
+                     var btnEdit    = `<button class='btn-edit' data-id='${data}'> Edit </button>`;
+                     var btnHapus   = `<button class='btn-hapus' data-id='${data}'> Hapus </button>`;
+                     return btnEdit + btnHapus;
+                  }
+                 }
             ]
         });
     });

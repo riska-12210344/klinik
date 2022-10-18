@@ -1,10 +1,11 @@
 <?php
 
 namespace App\Controllers;
-
+use Agoenxz21\Datatables\Datatable;
 use App\Controllers\BaseController;
 use App\Models\DokterModel;
 use CodeIgniter\Email\Email;
+use CodeIgniter\Exceptions\PageNotFoundException;
 use Config\Email as ConfigEmail;
 
 class DokterController extends BaseController
@@ -81,7 +82,60 @@ class DokterController extends BaseController
     }
 
     public function index(){
-        
+        return view('Dokter/table');
     }
-}
+      
+    public function all(){
+        $pm = new DokterModel();
+        $pm->select('id, nama, gender, email');
 
+        return (new Datatable( $pm ))
+                ->setFieldFilter(['nama', 'email', 'gender'])
+                ->draw();
+    }
+
+    public function show($id){
+        $r = (new DokterModel())->where('id', $id)->first();
+        if($r == null)throw PageNotFoundException::forPageNotFound();
+
+        return $this->response->setJSON($r);
+    }
+    
+    public function store(){
+        $pm     = new DokterModel();
+        $sandi  = $this->request->getvar('sandi');
+
+        $id = $pm->insert([
+            'nama'      => $this->request->getvar('nama'),
+            'gender'    => $this->request->getvar('gender'),
+            'email'     => $this->request->getvar('email'),
+            'sandi'     => password_hash($sandi, PASSWORD_BCRYPT),
+        ]);
+        return $this->response->setJSON(['id' => $this])
+                    ->setStatusCode( intval($id) > 0 ? 200 : 406 );
+    }
+
+    public function update(){
+        $pm     = new DokterModel();
+        $id     = (int)$this->request->getvar('id');
+
+        if( $pm->find($id) == null )
+            throw PageNotFoundException::forPageNotFound();
+
+        $hasil  = $pm->update($id, [
+            'nama'      => $this->request->getVar('nama'),
+            'gender'    => $this->request->getVar('gender'),
+            'email'     => $this->request->getVar('email'),
+        ]);
+        return $this->response->setJSON(['result'=>$hasil]);
+    }
+
+    public function delete(){
+        $pm     = new DokterModel();
+        $id     = $this->request->getVar('id');
+        $hasil  = $pm->delete($id);
+        return $this->response->setJSON(['result' => $hasil ]);
+    }
+
+}   
+    
