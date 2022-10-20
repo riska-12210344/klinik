@@ -87,10 +87,10 @@ class DokterController extends BaseController
       
     public function all(){
         $pm = new DokterModel();
-        $pm->select('id, nama, gender, email');
+        $pm->select('id, nama_depan, jenis_kelamin, email');
 
         return (new Datatable( $pm ))
-                ->setFieldFilter(['nama', 'email', 'gender'])
+                ->setFieldFilter(['nama_depan', 'email', 'jenis_kelamin'])
                 ->draw();
     }
 
@@ -106,8 +106,8 @@ class DokterController extends BaseController
         $sandi  = $this->request->getvar('sandi');
 
         $id = $pm->insert([
-            'nama'      => $this->request->getvar('nama'),
-            'gender'    => $this->request->getvar('gender'),
+            'nama_depan'      => $this->request->getvar('nama_depan'),
+            'jenis_kelamin'    => $this->request->getvar('jenis_kelamin'),
             'email'     => $this->request->getvar('email'),
             'sandi'     => password_hash($sandi, PASSWORD_BCRYPT),
         ]);

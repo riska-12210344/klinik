@@ -18,9 +18,9 @@ class DokterTest extends CIUnitTestCase{
     }
 
     public function testCreateShowUpdateDelete(){
-        $json = $this->call('post', 'Dokter', [
-            'nama' => 'Testing nama',
-            'gender' => 'L',
+        $json = $this->call('post', 'dokter', [
+            'nama_depan' => 'Testing nama',
+            'jenis_kelamin' => 'L',
             'email' => 'testing@email.com',
             'sandi' => 'testing'
         ])->getJSON();
@@ -28,24 +28,24 @@ class DokterTest extends CIUnitTestCase{
 
         $this->assertTrue($js['id'] > 0);
 
-        $this->call('get', "Dokter/".$js['id'])
+        $this->call('get', "dokter/".$js['id'])
              ->assertStatus(200);
         
-        $this->call('patch', 'Dokter', [
-            'nama' => 'Testing Dokter update',
+        $this->call('patch', 'dokter', [
+            'nama' => 'Testing dokter update',
             'gender' => 'L',
             'email' => 'testingupdate@email.com',
             'id' => $js['id']
         ])->assertStatus(200);
 
-        $this->call('delete', 'Dokter', [
+        $this->call('delete', 'dokter', [
             'id' => $js['id']
         ])->assertStatus(200);
 
     }
 
     public function testRead(){
-        $this->call('get', 'Dokter/all')
+        $this->call('get', 'dokter/all')
              ->assertStatus(200);
     }
 
