@@ -13,7 +13,7 @@ class DokterTest extends CIUnitTestCase{
     public function testLogin(){
         $this->call('post', 'login', [
             'email' => 'gafriansyah12@gmail.com',
-            'sandi' => '123456'
+            'sandi' => '12345678'
         ])->assertStatus(200);
     }
 

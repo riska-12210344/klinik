@@ -57,6 +57,46 @@ $routes->group('dokter', function(RouteCollection $routes){
 
 });
 
+$routes->group('poli', function(RouteCollection $routes){
+    $routes->get('/', 'PoliController::index');
+    $routes->post('/', 'PoliController::store');
+    $routes->patch('/', 'PoliController::update');
+    $routes->delete('/', 'PoliController::delete');
+    $routes->get('(:num)', 'PoliController::show/$1');
+    $routes->get('all', 'PoliController::all');
+
+});
+
+$routes->group('polidokter', function(RouteCollection $routes){
+    $routes->get('/', 'PoliDokterController::index');
+    $routes->post('/', 'PoliDokterController::store');
+    $routes->patch('/', 'PoliDokterController::update');
+    $routes->delete('/', 'PoliDokterController::delete');
+    $routes->get('(:num)', 'PoliDokterController::show/$1');
+    $routes->get('all', 'PoliDokterController::all');
+
+});
+
+$routes->group('spesialis', function(RouteCollection $routes){
+    $routes->get('/', 'SpesialisController::index');
+    $routes->post('/', 'SpesialisController::store');
+    $routes->patch('/', 'SpesialisController::update');
+    $routes->delete('/', 'SpesialisController::delete');
+    $routes->get('(:num)', 'SpesialisController::show/$1');
+    $routes->get('all', 'SpesialisController::all');
+
+});
+
+$routes->group('spesialisdokter', function(RouteCollection $routes){
+    $routes->get('/', 'SpesialisDokterController::index');
+    $routes->post('/', 'SpesialisDokterController::store');
+    $routes->patch('/', 'SpesialisDokterController::update');
+    $routes->delete('/', 'SpesialisDokterController::delete');
+    $routes->get('(:num)', 'SpesialisDokterController::show/$1');
+    $routes->get('all', 'SpesialisDokterController::all');
+
+});
+
 /*
  * --------------------------------------------------------------------
  * Additional Routing

@@ -29,7 +29,7 @@ class DokterController extends BaseController
 
         }
         $this->session->set('Dokter', $Dokter);
-        return $this->response->setJSON(['message'=>"selamat datang {$Dokter['nama']} "])
+        return $this->response->setJSON(['message'=>"selamat datang {$Dokter['nama_depan']} "])
                     ->setStatusCode(200);
     }
 
@@ -111,7 +111,7 @@ class DokterController extends BaseController
             'email'     => $this->request->getvar('email'),
             'sandi'     => password_hash($sandi, PASSWORD_BCRYPT),
         ]);
-        return $this->response->setJSON(['id' => $this])
+        return $this->response->setJSON(['id' => $id])
                     ->setStatusCode( intval($id) > 0 ? 200 : 406 );
     }
 
@@ -123,8 +123,8 @@ class DokterController extends BaseController
             throw PageNotFoundException::forPageNotFound();
 
         $hasil  = $pm->update($id, [
-            'nama'      => $this->request->getVar('nama'),
-            'gender'    => $this->request->getVar('gender'),
+            'nama_depan'      => $this->request->getVar('nama_depan'),
+            'jenis_kelamin'    => $this->request->getVar('jenis_kelamin'),
             'email'     => $this->request->getVar('email'),
         ]);
         return $this->response->setJSON(['result'=>$hasil]);
