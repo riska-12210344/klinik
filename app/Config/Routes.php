@@ -2,6 +2,8 @@
 
 namespace Config;
 
+use CodeIgniter\Router\RouteCollection;
+
 // Create a new instance of our RouteCollection class.
 $routes = Services::routes();
 
@@ -37,6 +39,23 @@ $routes->set404Override();
 // route since we don't have to scan directories.
 $routes->get('/', 'Home::index');
 
+$routes->group('login', function(RouteCollection $routes){
+    $routes->get('lupa', 'penggunaController::viewLupaPassword');
+    $routes->get('/', 'penggunaController::viewLogin');
+    $routes->post('/', 'penggunaController::login');
+    $routes->delete('/', 'penggunaController::logout');
+    $routes->patch('/', 'penggunaController::lupaPassword');
+});
+
+$routes->group('Pasien', function(RouteCollection $routes){
+    $routes->get('/', 'penggunaController::index');
+    $routes->post('/', 'penggunaController::store');
+    $routes->patch('/', 'penggunaController::update');
+    $routes->delete('/', 'penggunaController::delete');
+    $routes->get('(:num)', 'penggunaController::show/$1');
+    $routes->get('all', 'penggunaController::all');
+
+});
 /*
  * --------------------------------------------------------------------
  * Additional Routing

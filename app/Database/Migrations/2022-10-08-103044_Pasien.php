@@ -10,14 +10,14 @@ class Pasien extends Migration
     public function up()
     {
     $this->forge->addField([
-        'id'            => ['type' =>'int','constraint'     =>10, 'usingned'=>true,'auto-increment'=>true ],
+        'id'            => ['type' =>'int','constraint'     =>10, 'usingned'=>true,'auto_increment'=>true ],
         'no_rekammedik' => ['type' =>'varchar', 'constraint'=>80, 'null'    =>true],
-        'nama_depan'    => ['type' =>'varchar', 'Constraint'=>50, 'null'    =>true], 
+        'nama_depan'    => ['type' =>'varchar', 'constraint'=>50, 'null'    =>true], 
         'nama_belakang' => ['type' =>'varchar', 'constraint'=>80, 'null'    =>true],
         'nik'           => ['type' =>'varchar', 'constraint'=>16, 'null'    =>true],
         'jenis_kelamin' => ['type' =>'enum("L","P")',              'null'   =>true],
         'tgl_lahir'     => ['type' =>'date', 'null'         =>true],
-        'tempat_lahir'  => ['type' =>'varchar','constrsint' =>50,  'null'   =>true],
+        'tempat_lahir'  => ['type' =>'varchar','constraint' =>50,  'null'   =>true],
         'alamat'        => ['type' =>'varchar','constraint' =>225, 'null'   =>true],
         'kota'          => ['type' =>'varchar','constraint' =>100, 'null'   =>true],
         'no_telp'       => ['type' =>'varchar','constraint' =>17,  'null'   =>true],
@@ -30,8 +30,8 @@ class Pasien extends Migration
         'update_at'   =>['type'=>'datetime', 'null'=>true],
         'deleted'     =>['type'=>'datetime', 'null'=>true],
     ]);
-$this->forge->addPrimaryKey('id');
-$this->forge->createtable('pasien');
+        $this->forge->addPrimaryKey('id');
+        $this->forge->createtable('pasien');
     }
     public function down()
     {

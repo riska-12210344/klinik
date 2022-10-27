@@ -61,7 +61,7 @@ class Email extends BaseConfig
      *
      * @var string
      */
-    public $SMTPPass = 'fkkcypcpdiwtfisz';
+    public $SMTPPass = 'cvvmxigrlzydvqxb';
 
     /**
      * SMTP Port
@@ -75,7 +75,7 @@ class Email extends BaseConfig
      *
      * @var int
      */
-    public $SMTPTimeout = 5;
+    public $SMTPTimeout = 25;
 
     /**
      * Enable persistent SMTP connections
